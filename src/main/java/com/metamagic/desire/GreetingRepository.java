@@ -37,6 +37,7 @@ public class GreetingRepository {
 		        tx.rollback();
 		    }
 		}
+		pm.close();
 	}
 	
 	public Greeting findById(String id){
@@ -53,6 +54,7 @@ public class GreetingRepository {
 		}
 		finally
 		{
+			pm.close();
 		}
 		return working_greeting;
 	}
@@ -82,6 +84,7 @@ public class GreetingRepository {
 //		    {
 //		        tx.rollback();
 //		    }
+			pm.close();
 		}
 		
 		return working_greeting;

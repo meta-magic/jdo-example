@@ -31,7 +31,8 @@ public class HelloController {
 	public @ResponseBody String save(){
 		log.info("RECORD SAVED");
 		Set<TestImpl> tests= new HashSet<TestImpl>();
-		tests.add(new TestImpl("1","1"));
+		Message message = new Message("hello");
+		tests.add(new TestImpl("1","1",message));
 		Greeting greeting = new Greeting("liu", "hi",tests);
 		greetingRepository.save(greeting);
 		List<Greeting> result = greetingRepository.findAll();
@@ -41,11 +42,13 @@ public class HelloController {
 	@RequestMapping("/update")
 	public @ResponseBody String update(){
 		log.info("RECORD UPDATED");
-		Greeting greeting = greetingRepository.findById("16285d82-b29a-4b37-919d-b7ea6ee180f8");
+		Greeting greeting = greetingRepository.findById("992154d1-6398-4372-8062-300fab8fa068");
 		greeting.setMsg(greeting.getMsg() +"-changed");
-		for (Iterator iterator = greeting.getTests().iterator(); iterator.hasNext();) {
+		for (Iterator<TestImpl> iterator = greeting.getTests().iterator(); iterator.hasNext();) {
 			TestImpl type = (TestImpl) iterator.next();
 			type.setName(type.getName()+"--CHANGED");
+			/* update second level embedded object  */
+			type.getMessage().setData(type.getMessage().getData() + "--UPDATED");
 		}
 		greetingRepository.update(greeting);
 		return "RECORD UPDATED";
@@ -63,6 +66,7 @@ public class HelloController {
 			for (Iterator iterator1 = greeting.getTests().iterator(); iterator1.hasNext();) {
 				TestImpl type = (TestImpl) iterator1.next();
 				type.setName("ABCD--"+type.getName());
+				type.getMessage().setData(type.getMessage().getData() + "--UPDATED");
 			}
 			greetingRepository.update(greeting);
 		}
