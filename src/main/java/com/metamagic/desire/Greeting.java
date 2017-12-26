@@ -21,11 +21,15 @@ public class Greeting {
 	@Persistent(defaultFetchGroup = "true")
 	private Set<TestImpl> tests;
 	
-	public Greeting(String name, String msg, Set<TestImpl> tests) {
+	@Persistent(defaultFetchGroup= "true")
+	private InfoClass infoClass;
+	
+	public Greeting(String name, String msg, Set<TestImpl> tests, InfoClass infoClass) {
 		super();
 		this.name = name;
 		this.msg = msg;
 		this.tests = tests;
+		this.infoClass = infoClass;
 	}
 
 	public String getId() {
@@ -60,7 +64,14 @@ public class Greeting {
 		this.tests = tests;
 	}
 
-	
+	public InfoClass getInfoClass() {
+		return infoClass;
+	}
+
+	public void setInfoClass(InfoClass infoClass) {
+		this.infoClass = infoClass;
+	}
+
 	@Override
 	public String toString() {
 		return "Greeting [id=" + id + ", name=" + name + ", msg=" + msg + ", tests=" + tests + "]";

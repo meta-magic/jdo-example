@@ -42,7 +42,7 @@
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-accessplatform-jdo-mongodb</artifactId>
-			<version>5.1.4</version>
+			<version>5.1.3</version>
 			<type>pom</type>
 		</dependency>
 	</dependencies>
